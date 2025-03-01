@@ -5,11 +5,25 @@ import Header from "./Header";
 import AddContact from "./AddContact";
 import ContactList from "./ContactList";
 function App() {
+  const contacts =[
+    {
+      id:"1",
+      "name":"Mohit",
+      "email":"mohit@gmail.com"
+    },
+    {
+      id:"2",
+      "name":"Surya",
+      "email":"Surya@gmail.com"
+    },
+
+  ]
   return (
-   <div>
+   <div className="ui container">
+    lavada
     <Header/>
     <AddContact/>
-    <ContactList/>
+    <ContactList contacts={contacts}/>
    </div>
       
   );
