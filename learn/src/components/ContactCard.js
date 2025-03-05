@@ -1,15 +1,34 @@
 import React from 'react';
-const ContactCard =(props) =>{
-    const{id,name,email}=props.contact;
-    return(
-        <div clasName="item"> 
-         <div className="content">
-            <div className="header">{name}</div>
-            <div>{email}</div>
-            </div>
-            <i className="trash alternate outline icon" style={{color:'red',marginTop:"7px"}}></i>
-            </div>
-   
-);
-}
+import 'semantic-ui-css/semantic.min.css';  // Import Semantic UI CSS
+
+const ContactCard = (props) => {
+  const { id, name, email } = props.contact;
+
+  return (
+    <div className="u" style={{ marginBottom: '30px' }}>
+      <div className="content">
+        {/* Contact Name */}
+        <div className="header" style={{ marginBottom: '50px' }}>
+          {name}
+        </div>
+
+        {/* Contact Email */}
+        <div className="description" style={{ marginBottom: '90px' }}>
+          {email}
+        </div>
+      </div>
+
+      {/* Action Section */}
+      <div className="extra content" style={{ textAlign: 'right' }}>
+        <i
+          className="trash alternate outline icon"
+          style={{ color: 'red', cursor: 'pointer' }}
+          onClick={() => props.clickHandler(id)} // Delete handler
+          title="Delete Contact" // Tooltip on hover
+        ></i>
+      </div>
+    </div>
+  );
+};
+
 export default ContactCard;
