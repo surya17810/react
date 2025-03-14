@@ -1,38 +1,52 @@
-import React from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-class AddContact extends React.Component {
-    state={
-        name:"",
-        email:"",
-    };
-    add=(e)=>{
-         e.preventDefault();
-         if (this.state.name==="" || this.state.email===""){
+const AddContact = ({ addContactHandler }) => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const navigate = useNavigate(); // ✅ Use the navigate function
+
+    const add = (e) => {
+        e.preventDefault();
+        if (name === "" || email === "") {
             alert("All fields are mandatory");
             return;
-         }
-         this.props.addContactHandler(this.state);
-         this.setState({name:"",email:""});
-         console.log(this.state);
+        }
+        addContactHandler({ name, email });
+        setName("");
+        setEmail("");
+        navigate("/"); // ✅ Redirect to the home page
     };
-    render() {
-        return (
-            <div className="ui main">
-                <h2>Add Contact</h2>
-                <form className="ui form" onSubmit={this.add}>
-                    <div className="field">
-                        <label>Name</label>
-                        <input type="text" name="name" placeholder="name" value={this.state.name} onChange={ (e)=> this.setState({name:e.target.value})}/>
-                    </div>
-                    <div className="field">
-                        <label>Email</label>
-                        <input type="text" name="email" placeholder="email" value={this.state.email} onChange={ (e)=> this.setState({email:e.target.value})}/>
-                    </div>
-                    <button className="ui button blue">Add</button>
-                </form>
-            </div>
-        );
-    }
-}
+
+    return (
+        <div className="ui main" style={{ marginTop: "80px" }}> 
+            {/* ✅ Added marginTop to push it down from the navbar */}
+            <h2>Add Contact</h2>
+            <form className="ui form" onSubmit={add}>
+                <div className="field">
+                    <label>Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </div>
+                <div className="field">
+                    <label>Email</label>
+                    <input
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+                <button className="ui button blue">Add</button>
+            </form>
+        </div>
+    );
+};
 
 export default AddContact;
